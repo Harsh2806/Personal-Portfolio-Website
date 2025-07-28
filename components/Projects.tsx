@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -15,21 +15,31 @@ import {
   Shield,
   Brain,
   Database,
-} from "lucide-react"
-import Image from "next/image"
+} from "lucide-react";
+import Image from "next/image";
 
 const Projects = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const projects = [
     {
       title: "LLA Bot",
       subtitle: "AI-Powered Legal Assistant",
-      shortDescription: "Intelligent chatbot providing accurate Indian labor law guidance",
+      shortDescription:
+        "Intelligent chatbot providing accurate Indian labor law guidance",
       fullDescription:
         "An intelligent chatbot system designed to answer complex Indian labour law queries using advanced AI technologies. Built with Flask backend and Gemini language model, featuring Pinecone vector database for semantic search and natural language processing for legal document understanding.",
-      technologies: ["Python", "Flask", "Gemini AI", "HuggingFace", "Pinecone", "Vector Database", "NLP", "Legal Tech"],
+      technologies: [
+        "Python",
+        "Flask",
+        "Gemini AI",
+        "HuggingFace",
+        "Pinecone",
+        "Vector Database",
+        "NLP",
+        "Legal Tech",
+      ],
       images: [
         "/placeholder.svg?height=500&width=800&text=LLA+Bot+Dashboard",
         "/placeholder.svg?height=500&width=800&text=Chat+Interface",
@@ -79,7 +89,7 @@ const Projects = () => {
       ],
       color: "#a6a1cb",
     },
-  ]
+  ];
 
   return (
     <section className="py-32 px-4 max-w-7xl mx-auto">
@@ -90,7 +100,10 @@ const Projects = () => {
         transition={{ duration: 0.6 }}
         className="mb-20"
       >
-        <motion.h2 className="text-5xl md:text-6xl font-serif mb-6 text-center relative" whileHover={{ scale: 1.02 }}>
+        <motion.h2
+          className="text-5xl md:text-6xl font-serif mb-6 text-center relative"
+          whileHover={{ scale: 1.02 }}
+        >
           <span className="relative bg-gradient-to-r from-[#a6a1cb] via-[#c2b8a3] to-[#6c7b8b] bg-clip-text text-transparent">
             Featured Project
             <motion.div
@@ -107,60 +120,76 @@ const Projects = () => {
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 0.5 }}
         >
-          Showcasing innovative AI solutions that bridge technology and real-world impact
+          Showcasing innovative AI solutions that bridge technology and
+          real-world impact
         </motion.p>
       </motion.div>
 
       <div className="space-y-20">
         {projects.map((project, index) => (
-          <ProjectShowcase key={index} project={project} index={index} isInView={isInView} />
+          <ProjectShowcase
+            key={index}
+            project={project}
+            index={index}
+            isInView={isInView}
+          />
         ))}
       </div>
     </section>
-  )
-}
+  );
+};
 
-const ProjectShowcase = ({ project, index, isInView }: { project: any; index: number; isInView: boolean }) => {
-  const [currentImage, setCurrentImage] = useState(0)
-  const [isHovered, setIsHovered] = useState(false)
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+const ProjectShowcase = ({
+  project,
+  index,
+  isInView,
+}: {
+  project: any;
+  index: number;
+  isInView: boolean;
+}) => {
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   // Auto-play carousel
   useEffect(() => {
-    if (!isAutoPlaying || project.images.length <= 1) return
+    if (!isAutoPlaying || project.images.length <= 1) return;
 
     const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % project.images.length)
-    }, 4000)
+      setCurrentImage((prev) => (prev + 1) % project.images.length);
+    }, 4000);
 
-    return () => clearInterval(interval)
-  }, [isAutoPlaying, project.images.length])
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, project.images.length]);
 
   useEffect(() => {
     if (isHovered) {
-      setIsAutoPlaying(false)
+      setIsAutoPlaying(false);
     } else {
-      const timer = setTimeout(() => setIsAutoPlaying(true), 2000)
-      return () => clearTimeout(timer)
+      const timer = setTimeout(() => setIsAutoPlaying(true), 2000);
+      return () => clearTimeout(timer);
     }
-  }, [isHovered])
+  }, [isHovered]);
 
   const nextImage = () => {
-    setIsAutoPlaying(false)
-    setCurrentImage((prev) => (prev + 1) % project.images.length)
-  }
+    setIsAutoPlaying(false);
+    setCurrentImage((prev) => (prev + 1) % project.images.length);
+  };
 
   const prevImage = () => {
-    setIsAutoPlaying(false)
-    setCurrentImage((prev) => (prev - 1 + project.images.length) % project.images.length)
-  }
+    setIsAutoPlaying(false);
+    setCurrentImage(
+      (prev) => (prev - 1 + project.images.length) % project.images.length
+    );
+  };
 
   const goToImage = (index: number) => {
-    setIsAutoPlaying(false)
-    setCurrentImage(index)
-  }
+    setIsAutoPlaying(false);
+    setCurrentImage(index);
+  };
 
-  const IconComponent = project.icon
+  const IconComponent = project.icon;
 
   return (
     <motion.div
@@ -185,10 +214,15 @@ const ProjectShowcase = ({ project, index, isInView }: { project: any; index: nu
                 <IconComponent size={40} className="text-[#a6a1cb]" />
               </motion.div>
               <div>
-                <motion.h3 className="text-3xl md:text-4xl font-serif text-[#a6a1cb] mb-2" whileHover={{ scale: 1.02 }}>
+                <motion.h3
+                  className="text-3xl md:text-4xl font-serif text-[#a6a1cb] mb-2"
+                  whileHover={{ scale: 1.02 }}
+                >
                   {project.title}
                 </motion.h3>
-                <p className="text-lg font-mono text-[#c2b8a3]">{project.subtitle}</p>
+                <p className="text-lg font-mono text-[#c2b8a3]">
+                  {project.subtitle}
+                </p>
               </div>
             </div>
 
@@ -200,10 +234,16 @@ const ProjectShowcase = ({ project, index, isInView }: { project: any; index: nu
                   className="text-center p-3 bg-[#2a2a2a]/50 rounded-xl border border-[#3a3a3a]"
                   whileHover={{ scale: 1.05, backgroundColor: "#2a2a2a" }}
                   initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                  animate={
+                    isInView
+                      ? { opacity: 1, scale: 1 }
+                      : { opacity: 0, scale: 0.8 }
+                  }
                   transition={{ delay: 0.5 + i * 0.1 }}
                 >
-                  <div className="text-xl font-bold text-[#a6a1cb]">{stat.value}</div>
+                  <div className="text-xl font-bold text-[#a6a1cb]">
+                    {stat.value}
+                  </div>
                   <div className="text-xs text-[#e0e0e0]/60">{stat.label}</div>
                 </motion.div>
               ))}
@@ -228,19 +268,31 @@ const ProjectShowcase = ({ project, index, isInView }: { project: any; index: nu
               {/* Main Image Display */}
               <motion.div
                 key={currentImage}
-                initial={{ opacity: 0, scale: 1.1 }}
-                animate={{ opacity: 1, scale: isHovered ? 1.05 : 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.6 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
                 className="absolute inset-0"
               >
                 <Image
-                  src={project.images[currentImage] || "/placeholder.svg"}
+                  src={
+                    [
+                      "/LLA_logo.png",
+                      "/test_image_1.png",
+                      "/test_image_2.png",
+                      "/test_image_3.png",
+                    ][currentImage]
+                  }
                   alt={`${project.title} screenshot ${currentImage + 1}`}
                   fill
-                  className="object-cover transition-all duration-700"
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  className="object-contain transition-all duration-500"
                   style={{
-                    filter: isHovered ? "brightness(1.1) contrast(1.1)" : "brightness(1) contrast(1)",
+                    transform: isHovered ? "scale(1.02)" : "scale(1)",
+                    filter: isHovered
+                      ? "brightness(1.05) contrast(1.05)"
+                      : "brightness(1) contrast(1)",
                   }}
                 />
               </motion.div>
@@ -258,7 +310,9 @@ const ProjectShowcase = ({ project, index, isInView }: { project: any; index: nu
                   transition={{ delay: 1 }}
                 >
                   <div className="w-2 h-2 bg-[#a6a1cb] rounded-full animate-pulse" />
-                  <span className="text-xs text-white font-medium">AUTO PLAY</span>
+                  <span className="text-xs text-white font-medium">
+                    AUTO PLAY
+                  </span>
                 </motion.div>
               )}
 
@@ -305,7 +359,11 @@ const ProjectShowcase = ({ project, index, isInView }: { project: any; index: nu
                       <motion.div
                         className="absolute inset-0 bg-[#a6a1cb] rounded-full shadow-lg"
                         layoutId="activeIndicator"
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        transition={{
+                          type: "spring",
+                          bounce: 0.2,
+                          duration: 0.6,
+                        }}
                       />
                     )}
                   </motion.button>
@@ -328,7 +386,9 @@ const ProjectShowcase = ({ project, index, isInView }: { project: any; index: nu
               <motion.h4
                 className="text-lg font-semibold text-[#c2b8a3] mb-4 uppercase tracking-wider"
                 initial={{ opacity: 0, x: 20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+                animate={
+                  isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }
+                }
                 transition={{ delay: 0.4 }}
               >
                 About This Project
@@ -336,7 +396,9 @@ const ProjectShowcase = ({ project, index, isInView }: { project: any; index: nu
               <motion.p
                 className="text-[#e0e0e0]/80 leading-relaxed text-sm"
                 initial={{ opacity: 0, x: 20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+                animate={
+                  isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }
+                }
                 transition={{ delay: 0.5 }}
               >
                 {project.fullDescription}
@@ -352,11 +414,17 @@ const ProjectShowcase = ({ project, index, isInView }: { project: any; index: nu
                     className="flex justify-between items-center p-3 bg-[#2a2a2a]/30 rounded-lg border border-[#3a3a3a]/50"
                     whileHover={{ backgroundColor: "#2a2a2a", scale: 1.02 }}
                     initial={{ opacity: 0, x: 20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+                    animate={
+                      isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }
+                    }
                     transition={{ delay: 0.6 + i * 0.1 }}
                   >
-                    <span className="text-sm text-[#e0e0e0]/70">{stat.label}</span>
-                    <span className="text-sm font-bold text-[#a6a1cb]">{stat.value}</span>
+                    <span className="text-sm text-[#e0e0e0]/70">
+                      {stat.label}
+                    </span>
+                    <span className="text-sm font-bold text-[#a6a1cb]">
+                      {stat.value}
+                    </span>
                   </motion.div>
                 ))}
               </div>
@@ -381,7 +449,7 @@ const ProjectShowcase = ({ project, index, isInView }: { project: any; index: nu
                 <span className="font-medium">View Source</span>
               </motion.a>
               <motion.a
-                href={project.live}
+                href="https://drive.google.com/file/d/1jpUIP3eHgtlrRtzViWwf_N6dYf8pSIHV/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-[#a6a1cb] to-[#c2b8a3] rounded-xl hover:shadow-glow transition-all duration-300 text-[#0a0a0a] font-medium text-sm"
@@ -389,7 +457,7 @@ const ProjectShowcase = ({ project, index, isInView }: { project: any; index: nu
                 whileTap={{ scale: 0.98 }}
               >
                 <ExternalLink size={16} />
-                <span>Live Demo</span>
+                <span>View Report</span>
               </motion.a>
             </motion.div>
           </div>
@@ -408,7 +476,7 @@ const ProjectShowcase = ({ project, index, isInView }: { project: any; index: nu
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {project.features.map((feature: any, i: number) => {
-              const FeatureIcon = feature.icon
+              const FeatureIcon = feature.icon;
               return (
                 <motion.div
                   key={i}
@@ -420,10 +488,15 @@ const ProjectShowcase = ({ project, index, isInView }: { project: any; index: nu
                     boxShadow: "0 10px 30px rgba(166, 161, 203, 0.1)",
                   }}
                   initial={{ opacity: 0, y: 30 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  animate={
+                    isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                  }
                   transition={{ delay: 0.9 + i * 0.1 }}
                 >
-                  <motion.div className="flex items-center mb-4" whileHover={{ x: 5 }}>
+                  <motion.div
+                    className="flex items-center mb-4"
+                    whileHover={{ x: 5 }}
+                  >
                     <div className="p-2 bg-[#a6a1cb]/20 rounded-lg mr-3 group-hover:bg-[#a6a1cb]/30 transition-colors duration-300">
                       <FeatureIcon size={20} className="text-[#a6a1cb]" />
                     </div>
@@ -435,7 +508,7 @@ const ProjectShowcase = ({ project, index, isInView }: { project: any; index: nu
                     {feature.description}
                   </p>
                 </motion.div>
-              )
+              );
             })}
           </div>
         </div>
@@ -458,7 +531,11 @@ const ProjectShowcase = ({ project, index, isInView }: { project: any; index: nu
                 className="px-4 py-2 bg-[#2a2a2a] rounded-full text-sm text-[#e0e0e0]/80 border border-[#3a3a3a] hover:border-[#a6a1cb]/30 hover:bg-[#3a3a3a] hover:text-[#e0e0e0] transition-all duration-300 cursor-pointer"
                 whileHover={{ scale: 1.05, y: -2 }}
                 initial={{ opacity: 0, scale: 0.8 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                animate={
+                  isInView
+                    ? { opacity: 1, scale: 1 }
+                    : { opacity: 0, scale: 0.8 }
+                }
                 transition={{ delay: 1.3 + i * 0.05 }}
               >
                 {tech}
@@ -468,7 +545,7 @@ const ProjectShowcase = ({ project, index, isInView }: { project: any; index: nu
         </div>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default Projects
+export default Projects;

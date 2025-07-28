@@ -76,19 +76,20 @@ const About = () => {
         {/* Profile Image */}
         <motion.div
           variants={itemVariants}
-          className="bg-[#1a1a1a] rounded-2xl p-6 border border-[#2a2a2a] hover:border-[#c2b8a3]/30 transition-all duration-300 group overflow-hidden cursor-pointer"
+          className="bg-[#1a1a1a] rounded-2xl border border-[#2a2a2a] hover:border-[#c2b8a3]/30 transition-all duration-300 group overflow-hidden cursor-pointer"
           whileHover={{
             scale: 1.05,
             y: -5,
             boxShadow: "0 10px 30px rgba(194, 184, 163, 0.2)",
           }}
         >
-          <div className="relative w-full h-full rounded-xl overflow-hidden">
+          <div className="relative w-full h-full">
             <Image
-              src="/placeholder.png?height=200&width=200"
+              src="/placeholder.png?height=150&width=200"
               alt="Profile"
               fill
-              className="object-cover group-hover:scale-110 transition-transform duration-500"
+              className="object-cover object-[center_30%] group-hover:scale-110 transition-transform duration-500"
+              priority
             />
             <motion.div className="absolute inset-0 bg-gradient-to-t from-[#c2b8a3]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
@@ -175,7 +176,7 @@ const About = () => {
             className="text-4xl font-bold text-[#a6a1cb] mb-2 group-hover:text-[#c2b8a3] transition-colors duration-300"
             whileHover={{ scale: 1.1, rotate: [0, -2, 2, 0] }}
           >
-            2+
+            2+ Years of Learning
           </motion.h3>
           <motion.p
             className="text-[#e0e0e0]/80 group-hover:text-[#e0e0e0] transition-colors duration-300"
